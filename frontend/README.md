@@ -1,5 +1,44 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## End-to-end tests
+
+The Playwright E2E tests use the real Laravel API and MySQL database. Before running them:
+
+1. Configure `backend/.env` to connect to MySQL database `dicoding_jobs`.
+2. From `backend/`, run migrations and seed the local recruiter account plus sample vacancies:
+
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   php artisan db:seed --class=VacancySeeder
+   ```
+
+3. Keep the API running at `http://localhost:8000`:
+
+   ```bash
+   php artisan serve --host=localhost --port=8000
+   ```
+
+4. In `frontend/`, install the Chromium browser once:
+
+   ```bash
+   npx playwright install chromium
+   ```
+
+5. Run the E2E suite from `frontend/`:
+
+   ```bash
+   npm run test:e2e
+   ```
+
+Playwright starts the Next.js development server automatically at `http://localhost:3000`. The `VacancySeeder` is safe to rerun and ensures the sample `Product Engineer` and `Android Developer` vacancies required by the tests exist.
+
+## Recruiter login
+
+Recruiter login uses Laravel Sanctum's stateful SPA session cookies. Keep the frontend and API on the `localhost` hostname, configure `SANCTUM_STATEFUL_DOMAINS=localhost:3000` in `backend/.env`, and allow the frontend origin in CORS. The frontend initializes the Sanctum CSRF cookie before login and other write requests.
+
+The local/testing database seeder creates `test@example.com` with password `password`; this is for local development only and must not be used in a deployed environment. Production accounts must be provisioned with unique credentials.
+
 ## Getting Started
 
 First, run the development server:

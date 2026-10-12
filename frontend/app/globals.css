@@ -24,3 +24,49 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.vacancy-description > :first-child {
+  margin-top: 0;
+}
+
+.vacancy-description > :last-child {
+  margin-bottom: 0;
+}
+
+.vacancy-description h1,
+.vacancy-description h2,
+.vacancy-description h3,
+.vacancy-description h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.vacancy-description p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.vacancy-description ul,
+.vacancy-description ol {
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.vacancy-description ul {
+  list-style: disc;
+}
+
+.vacancy-description ol {
+  list-style: decimal;
+}
+
+.vacancy-description li + li {
+  margin-top: 0.2rem;
+}
+
+.vacancy-description a {
+  color: #2563eb;
+  text-decoration: underline;
+}
